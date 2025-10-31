@@ -3,12 +3,16 @@ import { createBullBoard } from "@bull-board/api";
 import { ExpressAdapter } from "@bull-board/express";
 import { BullMQAdapter } from "@bull-board/api/bullMQAdapter";
 import { zomatoProductImportQueue } from "../src/lib/bullmq/queue/zomatoProductImportQueue.js";
+import { productQueue } from "../src/lib/upload-service/queue/productQueue.js";
 
 const serverAdapter = new ExpressAdapter();
 serverAdapter.setBasePath("/admin/queues");
 
 createBullBoard({
-  queues: [new BullMQAdapter(zomatoProductImportQueue)],
+  queues: [
+    new BullMQAdapter(zomatoProductImportQueue),
+    new BullMQAdapter(productQueue),
+  ],
   serverAdapter,
 });
 

@@ -17,7 +17,7 @@ import { useNotification } from "@/store/hooks/useNotification";
 
 export default function ZomatoImportPopover() {
   const [url, setUrl] = useState("");
-  const [status, setStatus] = useState(null); // "loading" | "success" | "error"
+  const [status, setStatus] = useState(null); 
   const { userId } = useClientAuthData();
   const { activeProjectId } = useProject();
   const { pushNotification } = useNotification();
@@ -60,7 +60,7 @@ export default function ZomatoImportPopover() {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button size="sm" className="mt-2 flex items-center gap-2 rounded-md">
+        <Button size="sm" className="flex items-center gap-2 rounded-md">
           <PlusCircle className="w-4 h-4" />
           Import Products
         </Button>

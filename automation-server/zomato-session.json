@@ -1,0 +1,343 @@
+{
+  "cookies": [
+    {
+      "name": "ak_bmsc",
+      "value": "0CEBDE5A0292833E9FB86A067FC6F630~000000000000000000000000000000~YAAQ1gFAFz7SwOWZAQAAjoaFCx3/reqcXxIcdzwlzcFQ/QVsSWQyuwbQ4rTxWquRu2flOA6EC2wDFioq/jSAU8IwJV+t/KJoaj66rbTYt8P43GbvYZHEd+VA9ijftg8+506kpXnj+XvTFOf6u9xeruEz3YOIfZbwG0LwZhLm97gsKd5I8Ja7E07Z4/B52TXiUir0IMa9236bo6uU3o5DP0aDkC6FhSAiCAFdm6/iE9bR0X8jhdhURL2N9iBTCZSEekn5sJGGkN4IrGgkRM17ptvktVNBGqpNMcccwg0GfbH6FVHkgYi5Bgz+t3T72ksqdOgtC/1sDbm/aN0LmuokOppEKIV8y6TQCC6uWofnr1q7PWsECwYX8mBcR7fc0J9VT7NAkBqcOmHSiqhf9g==",
+      "domain": ".zomato.com",
+      "path": "/",
+      "expires": 1761137091.872849,
+      "httpOnly": true,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "zl",
+      "value": "en",
+      "domain": ".zomato.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "G_ENABLED_IDPS",
+      "value": "google",
+      "domain": ".www.zomato.com",
+      "path": "/",
+      "expires": 1795689895.173258,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "fbcity",
+      "value": "1",
+      "domain": ".zomato.com",
+      "path": "/",
+      "expires": 1776681895.30948,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "fre",
+      "value": "0",
+      "domain": ".zomato.com",
+      "path": "/",
+      "expires": 1795689932.602911,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "rd",
+      "value": "1380000",
+      "domain": ".zomato.com",
+      "path": "/",
+      "expires": 1795689932.603012,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "PHPSESSID",
+      "value": "18b12ab98b017178128d3f987a829e1d",
+      "domain": ".zomato.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "fbtrack",
+      "value": "711425cf558732158a9fc2227af0a068",
+      "domain": ".zomato.com",
+      "path": "/",
+      "expires": 1792233895.311724,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "_ga_EFHVMKBS6L",
+      "value": "GS2.1.s1761129895$o1$g0$t1761129895$j60$l0$h0",
+      "domain": ".zomato.com",
+      "path": "/",
+      "expires": 1795689895.975901,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "_ga",
+      "value": "GA1.1.382907230.1761129896",
+      "domain": ".zomato.com",
+      "path": "/",
+      "expires": 1795689895.978371,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "__Host-zmxcsrft",
+      "value": "32751ab4c4dd586863db89340fc549f59f82bcd12a81953d4f7771934803848b1100c7ab",
+      "domain": "api.zomato.com",
+      "path": "/",
+      "expires": 1761216295.984036,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "_abck",
+      "value": "9EE07A684F84B75FCD47B5C502C18B18~-1~YAAQxWw/F5N+VtyZAQAAupaFCw5CcaBpXTvCUUW0U2pa2JeVnA7JJmYkpRnBK6pMCPX6jeynrw0uKhcjq7cLLKozoXAvI4g3XVLOVNpx+0KZW/C9t3hpqwWUyi26bCXl47nPhthI9E9nhjJS+7yTmWkoZma6ZBY1ud7jIW4/fUKc8wGoo0EG3objeL8C1FeYip1jUftQahODwHBxn9K/8Vr+z7ABfs2XH0UKFT3DHGexxvBDknbSyC3gKBG6WNNuqGedeH/NtAu9/1XLLGqZimZW+BHHASAX5nOPovpo8OxD5Mg6BVoekwJI5Yd6uPQV2hu5vTjt+r9SwMHtbxeBVWttHAQHE/vbna3mmCELrQvPvo/7mYw+f4nuEcCKBykyiyJJJr1JCusLZ6HQa/Kk7v5+jpnyHcWuc2WFaFpXihGggQpePEzQTRJMK+0tGOcRLKaUaTWyojs=~-1~-1~-1~-1~-1",
+      "domain": ".zomato.com",
+      "path": "/",
+      "expires": 1792665895.98433,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "bm_sz",
+      "value": "DB4144D15FABA183D875338AB1DC5FB1~YAAQxWw/F5R+VtyZAQAAupaFCx1UGaQJT0kQTdUL40I0ZAMXWHdZG9Zv+EgodVXgXw7+Rd29YY4cmFitgt+ILqzfA+jFEJkElg2MnT2SJ/PH+vYtrxbsfBYm26aIegpTXWGc8NBGauBTG2cSJhoSeVngb/OMmmNjvTjCBVrSh9ZV2Gigj3DLrPBIZOGurq74irDn35L06u1L7noBYx5G4+dg+77STPTRHtJSpIrsihEdiIMnGvKK5wAzAMV0cncsT5JsgWpNQvZ1ASGD9xeEdZQD8wAT6RDDrY39bpzNLIbelvMluuKDiTPSdVo1GyTJ7t14+jb1TPJAbh5UX678g15eSNgQ8G1GVTqLy4PHcLyFv44OyPq9bg==~3684148~3486019",
+      "domain": ".zomato.com",
+      "path": "/",
+      "expires": 1761144295.984521,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "cid",
+      "value": "2c4e3ed9-0308-4d16-a237-3a5c99f7e944",
+      "domain": ".zomato.com",
+      "path": "/",
+      "expires": 1792607400,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "oauth2_authentication_csrf",
+      "value": "MTc2MTEyOTg5N3xEdi1CQkFFQ180SUFBUkFCRUFBQVB2LUNBQUVHYzNSeWFXNW5EQVlBQkdOemNtWUdjM1J5YVc1bkRDSUFJRGcwTldZMlpqSXpaRGxtTlRRMlpqTmhPVEl5TlRrMU56TXpabVl5TnpnMnxnQVHICio8d9xi7pSNdascjPMchvqVDpuKt_FfqYq5Wg==",
+      "domain": "accounts.zomato.com",
+      "path": "/",
+      "expires": 1763721897.556319,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "G_ENABLED_IDPS",
+      "value": "google",
+      "domain": ".accounts.zomato.com",
+      "path": "/",
+      "expires": 1795689898.127025,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "g_state",
+      "value": "{\"i_l\":0,\"i_ll\":1761129898808,\"i_b\":\"FG1eK7/6JwMxrIO9mEDWvVGp5UWivzGCy/m4SbsbdKg\"}",
+      "domain": "accounts.zomato.com",
+      "path": "/",
+      "expires": 1776681898,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "NID",
+      "value": "525=IC_9WHvP_5tRMheg_77nfvcHlSlX9PYv2hFiGl32YvoaQk9eC4JOOooeiEgAmRJy80B_Zi-rKmoX508bRK9-4z9_xOrCaw2-37sANPCOjymxdYhEM0IUAMysVjmlII_8fAEr15NGNAZjbREuRaTJ0KiKi189I5PjgD4TE9iuJM8nIlNo1URTgOqXQcgsgb3swg",
+      "domain": ".google.com",
+      "path": "/",
+      "expires": 1776941105.499812,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "oauth2_consent_csrf",
+      "value": "MTc2MTEyOTkyMnxEdi1CQkFFQ180SUFBUkFCRUFBQVB2LUNBQUVHYzNSeWFXNW5EQVlBQkdOemNtWUdjM1J5YVc1bkRDSUFJRGxoWlRZMk5qWXlOMlJqTVRReFpqQmhZVFpoWWpCbE9EWTRaV1UwT1RGaHzY7TNBBNbz6e3Wnej-9jRbzf-W9tXSivK8mAKSesbY3Q==",
+      "domain": "accounts.zomato.com",
+      "path": "/",
+      "expires": 1763721922.595788,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "zrt_3a5c99f7e944",
+      "value": "p5GGEh15l7Z10wdwWiKZZmI1NoAklhThE4-70zY0CYI.DBzJTon2wZhKxWb_WpzoIqwv13_4bysFczY8wIvDB2I",
+      "domain": "accounts.zomato.com",
+      "path": "/",
+      "expires": 1792665923.819224,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "zat",
+      "value": "wqauJiAo3HJJJGkmyrqtcy9HC4DeMfHVjDd-r15OfM8.qykDhTzU177m8kgOP1ZczaD4L4KrR4fFzymC6kTn4DY",
+      "domain": ".zomato.com",
+      "path": "/",
+      "expires": 1792665923.819458,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "ttaz",
+      "value": "1763721922",
+      "domain": ".zomato.com",
+      "path": "/",
+      "expires": 1792665923.819518,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "csrf",
+      "value": "5241ea6dd23ae3bbe0ce9de9e1eb7d19",
+      "domain": ".zomato.com",
+      "path": "/",
+      "expires": 1761216324.101534,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "hy-en",
+      "value": "1",
+      "domain": ".zomato.com",
+      "path": "/",
+      "expires": 1795689932.602781,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "X-Zomato-Mx-Auth-Token",
+      "value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJNZXJjaGFudE91dGxldFNlcnZpY2UiLCJleHAiOjE3NjExMzAyMjQsImlhdCI6MTc2MTEyOTkyNCwicnJtIjp7IjE5Njg5OTY4IjpbMl0sIjE5Nzc1NTk2IjpbMl0sIjIwMjU4Njg1IjpbMl0sIjIwNjI3NDY2IjpbMl0sIjIxMDQ3NDUxIjpbMl0sIjIxMTcxMjcwIjpbMl0sIjIxMzkzMjQ1IjpbMl0sIjIxNDcwMjUyIjpbMl0sIjIxNjQ2OTY5IjpbMl0sIjIxOTE0MzY2IjpbMl0sIjIyMDEwNTY4IjpbMl0sIjIyMDE1MDUwIjpbMl0sIjIyMDMxNDAzIjpbMl0sIjIyMDUxOTI2IjpbMl0sIjIyMDU1MDc5IjpbMl0sIjIyMDYyODkyIjpbMl0sIjIyMDYyOTY0IjpbMl0sIjIyMDYzNDczIjpbMl0sIjIyMDY0MDMxIjpbMl0sIjIyMDgzODA3IjpbMl0sIjIyMDkzODU4IjpbMl0sIjIyMDk2NjQwIjpbMl0sIjIyMTAzNzczIjpbMl0sIjIyMTA0NDA0IjpbMl0sIjIyMTA4NDg0IjpbMl0sIjIyMTA4NTQ5IjpbMl0sIjIyMTExOTU2IjpbMl0sIjIyMTE2MDU0IjpbMl0sIjIyMTMxNzk0IjpbMl0sIjIyMTM1NjI5IjpbMiwzXSwiMjIxMzk5MTUiOlsyXSwiMjIxNDAwMDciOlsyXSwiMjIxNDE0OTEiOlsyXSwiMjIxNDYzNDQiOlsyXSwiMjIxNDYzOTgiOlsyXSwiMjIxNTMwMDUiOlsyXSwiMjIxNTUxNTQiOlsyXSwiMjIxNzczMzEiOlsyXSwiMjIxNzk0ODMiOlsyXSwiMjIxOTYwNjciOlsyXSwiMjIyMjc3NjEiOlsyXSwiMjIyNjA2ODUiOlsyXSwiMzEyODU1IjpbMl19LCJ1SWQiOjM4MTk3OTUyMywiYkV4cCI6MTc2MTIxNjMyNH0.LmlH1QbGgdSupZxMhIAk_SAHAvC8rV6uI2xCoNnNPAuJBRB_tfPohA6Cvkv4l_SDe-xP449pPSr4goS7OQ8qdv4A2Ydw3IU37pr7HWVx1rOKdKA5mATvi9x7dYQOwm9_B4JAoDrtuz8902_vxGblWbzxrNgDYEELexwogUGDFpEKVCWA4WDJElyD8Lax0f4PhK1KVbH_fV6GDxF4EWytAhO7cxnfK2AKjNWQyURje1woXgZOFx9Fp0uZGEYtrLMHWXZv4aDHXc5Famr_pnfQ_YUsblj-CCQMMhuwXRXBO0XKtjZeLLyNSWpXr9fYNNobgJdork5Eo1If8jj9r8LSZA",
+      "domain": ".zomato.com",
+      "path": "/",
+      "expires": 1763721924.79406,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "socket_service_version",
+      "value": "v2",
+      "domain": ".zomato.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "AWSALB",
+      "value": "OEyOmqLuF/Faejn31NlJKP9M4X0RsdYjC0e0b+Ifs2M2Z4Y3PU9jfK+L0/+9xg53gTqZuLcZBOuHFuZe3TqWkg/ptYtTK7q7Bn7gQidjdaAJISldzyg32kaFkKHs",
+      "domain": "cc2.zomato.com",
+      "path": "/",
+      "expires": 1761734731.145032,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "AWSALBCORS",
+      "value": "OEyOmqLuF/Faejn31NlJKP9M4X0RsdYjC0e0b+Ifs2M2Z4Y3PU9jfK+L0/+9xg53gTqZuLcZBOuHFuZe3TqWkg/ptYtTK7q7Bn7gQidjdaAJISldzyg32kaFkKHs",
+      "domain": "cc2.zomato.com",
+      "path": "/",
+      "expires": 1761734731.145302,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "bm_sv",
+      "value": "E5C3E1AA30644A3AFB4E363B7D2FE0E5~YAAQD3BWuExAFdqZAQAAKyCGCx3uZ8UOn0HiPJU2NOUpa9FhWdX6P/Y9XQJoXqHo+Z4rh0WHPzthzn4pnj3d4yOGh4JxcQT5cwvmE6eXPUwqCbidZD8PqReQh/oIHRwbLap4BVcQjXh0QellyOr94ZDMoM/sREehin109Yu+4zpzbvqLn8KY4LX7y7f97h65Okf+m/AW6lMztG/WgY8F96bvnmHdJgS5KV6woOkDY20d63KA/skPQwdO5d9lUF+k3w==~1",
+      "domain": ".zomato.com",
+      "path": "/",
+      "expires": 1761137098.145456,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "AWSALBTG",
+      "value": "kx7E7LMf8hLB4cV+vbSMRDNJVF4qUsd1v+JJYo3K0glU9EWK4yK0FBiSryMPp7C8MeGqsTzB7GMjDVZB2Oz353AJK610R2z8uQQnIPJgJT01FNMRIfXiisVeCAgzD1JcjD8TVMwvA5xDhM0o76bEi+t6Yt1n324GG6oYobqjvKpf",
+      "domain": "www.zomato.com",
+      "path": "/",
+      "expires": 1761734731.601721,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "AWSALBTGCORS",
+      "value": "kx7E7LMf8hLB4cV+vbSMRDNJVF4qUsd1v+JJYo3K0glU9EWK4yK0FBiSryMPp7C8MeGqsTzB7GMjDVZB2Oz353AJK610R2z8uQQnIPJgJT01FNMRIfXiisVeCAgzD1JcjD8TVMwvA5xDhM0o76bEi+t6Yt1n324GG6oYobqjvKpf",
+      "domain": "www.zomato.com",
+      "path": "/",
+      "expires": 1761734731.602464,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "_dd_s",
+      "value": "rum=2&id=6dea0580-adc6-4ee0-9fb6-c2149f447084&created=1761129894782&expire=1761130854792",
+      "domain": "www.zomato.com",
+      "path": "/",
+      "expires": 1761130855,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Strict"
+    }
+  ],
+  "origins": [
+    {
+      "origin": "https://www.zomato.com",
+      "localStorage": [
+        {
+          "name": "o2partners/open-tabs",
+          "value": "1"
+        },
+        {
+          "name": "mxOrdersLastUpdatedAt",
+          "value": "1761129929712"
+        },
+        {
+          "name": "z-mx-d/partners/current-context",
+          "value": "o2"
+        }
+      ]
+    }
+  ]
+}

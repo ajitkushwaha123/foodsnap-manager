@@ -3,9 +3,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useCallback } from "react";
 import {
-  fetchCategories,
   fetchProducts,
-  importZomatoMenu,
+  deleteProduct,
+  deleteMultipleProduct,
   resetProductState,
 } from "@/store/slices/productSlice";
 
@@ -20,37 +20,64 @@ export const useProduct = () => {
   }, [dispatch]);
 
   const getAllProducts = useCallback(
-    async ({ userId, projectId, page = 1, limit = 10 }) => {
+    async ({ userId, projectId, page = 1, limit = 100 }) => {
       if (!userId || !projectId) {
         console.warn("⚠️ Missing userId or projectId in getAllProducts");
         return;
       }
+
       console.log("📦 Fetching products for:", {
         userId,
         projectId,
         page,
         limit,
       });
-      await dispatch(
-        fetchProducts({ userId, projectId, page, limit })
-      ).unwrap();
+
+      try {
+        await dispatch(
+          fetchProducts({ userId, projectId, page, limit })
+        ).unwrap();
+      } catch (err) {
+        console.error("❌ Failed to fetch products:", err);
+      }
     },
     [dispatch]
   );
 
-  const getAllCategory = useCallback(
-    async ({ userId, projectId }) => {
-      if (!userId || !projectId) {
-        console.warn("⚠️ Missing userId or projectId in getAllCategory");
+  const removeProduct = useCallback(
+    async ({ userId, projectId, productId }) => {
+      if (!userId || !projectId || !productId) {
+        console.warn("⚠️ Missing required params in removeProduct");
         return;
       }
-      console.log("📦 Fetching categories for:", {
-        userId,
-        projectId,
-        page,
-        limit,
-      });
-      await dispatch(fetchCategories({ userId, projectId })).unwrap();
+
+      console.log("🗑 Deleting product:", { userId, projectId, productId });
+
+      try {
+        await dispatch(
+          deleteProduct({ userId, projectId, productId })
+        ).unwrap();
+      } catch (err) {
+        console.error("❌ Failed to delete product:", err);
+      }
+    },
+    [dispatch]
+  );
+
+  const removeAllProducts = useCallback(
+    async ({ userId, projectId }) => {
+      if (!userId || !projectId) {
+        console.warn("⚠️ Missing required params in removeAllProducts");
+        return;
+      }
+
+      console.log("🗑 Deleting all products for:", { userId, projectId });
+
+      try {
+        await dispatch(deleteMultipleProduct({ userId, projectId })).unwrap();
+      } catch (err) {
+        console.error("❌ Failed to delete all products:", err);
+      }
     },
     [dispatch]
   );
@@ -64,6 +91,7 @@ export const useProduct = () => {
     categories,
     resetProducts,
     getAllProducts,
-    getAllCategory,
+    removeProduct,
+    removeAllProducts,
   };
 };
