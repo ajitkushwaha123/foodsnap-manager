@@ -37,10 +37,13 @@ export const deleteProduct = createAsyncThunk(
 
 export const deleteMultipleProduct = createAsyncThunk(
   "product/deleteMultipleProduct",
-  async ({ userId, projectId }, { rejectWithValue }) => {
+  async ({ userId, projectId, page, limit, all }, { rejectWithValue }) => {
     try {
       const { data } = await axios.delete(
-        `/api/${userId}/projects/${projectId}/products`
+        `/api/${userId}/projects/${projectId}/products`,
+        {
+          data: { page, limit, all },
+        }
       );
       return { message: data.message };
     } catch (error) {

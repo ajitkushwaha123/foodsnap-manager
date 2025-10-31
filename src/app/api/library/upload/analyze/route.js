@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import dbConnect from "@/lib/dbConnect";
 import Image from "@/model/Image";
+import Product from "@/model/Product";
 
 const normalizeFoodType = (ft, fallback = "veg") => {
   if (!ft) return fallback;
@@ -21,20 +22,30 @@ export const POST = async (req) => {
     await dbConnect();
 
     const body = await req.json();
-    const { image_url, title, category, sub_category, food_type, description } =
-      body;
+    const {
+      image_url,
+      title,
+      category,
+      sub_category,
+      food_type,
+      description,
+      productId,
+    } = body;
 
-    if (!image_url || !title || !category || !food_type) {
+    console.log("📦 Received upload request:", body);
+
+    if (!image_url || !title || !category || !food_type || !productId) {
       return NextResponse.json(
         {
+          success: false,
           error:
-            "Missing required fields: image_url, title, category, food_type",
+            "Missing required fields: image_url, title, category, food_type, productId",
         },
         { status: 400 }
       );
     }
 
-    const newImage = new Image({
+    const newImage = await Image.create({
       title: title || "-",
       auto_tags: [],
       cuisine: "",
@@ -42,7 +53,7 @@ export const POST = async (req) => {
       description: description || "",
       category: category || "",
       sub_category: sub_category || "",
-      food_type: normalizeFoodType(food_type, food_type || "veg"),
+      food_type: normalizeFoodType(food_type, "veg"),
       image_url,
       approved: false,
       system_approved: true,
@@ -52,9 +63,16 @@ export const POST = async (req) => {
       source: "zomato_api",
     });
 
-    await newImage.save();
+    console.log("✅ Image saved:", newImage._id.toString());
 
-    console.log("✅ Image saved to database:", newImage._id);
+    const product = await Product.findOne({ _id: productId });
+    if (product) {
+      product.status = "done";
+      await product.save();
+      console.log(`📦 Product ${productId} marked as done`);
+    } else {
+      console.warn(`⚠️ Product not found for ID: ${productId}`);
+    }
 
     return NextResponse.json(
       { success: true, image: newImage },
@@ -63,7 +81,10 @@ export const POST = async (req) => {
   } catch (error) {
     console.error("[IMAGE_UPLOAD_ERROR]", error);
     return NextResponse.json(
-      { error: "An error occurred while uploading the image." },
+      {
+        success: false,
+        error: error.message || "An error occurred while uploading the image.",
+      },
       { status: 500 }
     );
   }

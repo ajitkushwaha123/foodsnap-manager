@@ -65,8 +65,8 @@ export const useProduct = () => {
   );
 
   const removeAllProducts = useCallback(
-    async ({ userId, projectId }) => {
-      if (!userId || !projectId) {
+    async ({ userId, projectId, page, limit, all }) => {
+      if (!userId || !projectId || !page || !limit) {
         console.warn("⚠️ Missing required params in removeAllProducts");
         return;
       }
@@ -74,7 +74,9 @@ export const useProduct = () => {
       console.log("🗑 Deleting all products for:", { userId, projectId });
 
       try {
-        await dispatch(deleteMultipleProduct({ userId, projectId })).unwrap();
+        await dispatch(
+          deleteMultipleProduct({ userId, projectId, page, limit, all })
+        ).unwrap();
       } catch (err) {
         console.error("❌ Failed to delete all products:", err);
       }

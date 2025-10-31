@@ -31,7 +31,7 @@ const worker = new Worker(
         sub_category,
         food_type,
         description,
-        resId,
+        productId,
         file,
       } = job.data;
 
@@ -52,6 +52,7 @@ const worker = new Worker(
           sub_category,
           food_type,
           description,
+          productId,
         }
       );
     } catch (err) {

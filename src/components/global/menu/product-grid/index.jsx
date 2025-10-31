@@ -66,8 +66,18 @@ export default function ProductGrid({
                   transition={{ duration: 0.2 }}
                   className="w-full cursor-pointer"
                 >
-                  <Card className="overflow-hidden rounded-md p-3 shadow-sm hover:shadow-md transition relative group">
-                    <div className="relative">
+                  <Card
+                    className={`overflow-hidden border-2 ${
+                      product.status == "accepted"
+                        ? "border-blue-300"
+                        : product.status == "done"
+                        ? "border-green-500"
+                        : product.status == "rejected"
+                        ? "border-red-300"
+                        : "border-gray-300"
+                    } rounded-md p-3 shadow-sm hover:shadow-md transition relative group`}
+                  >
+                    <div className="relative border-2">
                       {product?.img ? (
                         <img
                           src={product.img}

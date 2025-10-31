@@ -39,3 +39,40 @@ export const DELETE = async (request, { params }) => {
     );
   }
 };
+
+export const PUT = async (request, { params }) => {
+  try {
+    const { userId, projectId, productId } = await params;
+    const { status } = await request.json();
+    if (!userId || !projectId || !productId) {
+      return NextResponse.json(
+        { error: "Missing required parameters" },
+        { status: 400 }
+      );
+    }
+
+    await dbConnect();
+    const updatedProduct = await Product.findOneAndUpdate(
+      { _id: productId, userId, projectId },
+      { status },
+      { new: true }
+    );
+
+    if (!updatedProduct) {
+      return NextResponse.json({ error: "Product not found" }, { status: 404 });
+    }
+
+    return NextResponse.json(
+      { message: "Product updated successfully", updatedProduct },
+      { status: 200 }
+    );
+  } catch (err) {
+    return NextResponse.json(
+      {
+        error: "Failed to update product",
+        details: err.message,
+      },
+      { status: 500 }
+    );
+  }
+};

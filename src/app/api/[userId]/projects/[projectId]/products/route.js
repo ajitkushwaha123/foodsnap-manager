@@ -75,6 +75,7 @@ export const GET = async (req, { params }) => {
 export const DELETE = async (req, { params }) => {
   try {
     const { userId, projectId } = await params;
+    const { page, limit, all } = await req.json();
 
     if (!userId || !projectId) {
       return NextResponse.json(
@@ -82,22 +83,50 @@ export const DELETE = async (req, { params }) => {
         { status: 400 }
       );
     }
-
     await dbConnect();
 
-    const result = await Product.deleteMany({ userId, projectId });
+    const query = { userId, projectId };
+
+    if (all) {
+      const result = await Product.deleteMany(query);
+      return NextResponse.json(
+        {
+          success: true,
+          message: `All ${result.deletedCount} products deleted successfully.`,
+        },
+        { status: 200 }
+      );
+    }
+
+    const skip = (page - 1) * limit;
+
+    const productsToDelete = await Product.find(query)
+      .sort({ _id: 1 })
+      .skip(skip)
+      .limit(limit)
+      .select("_id");
+
+    if (!productsToDelete.length) {
+      return NextResponse.json(
+        { message: "No products found for this page." },
+        { status: 404 }
+      );
+    }
+
+    const ids = productsToDelete.map((p) => p._id);
+    const result = await Product.deleteMany({ _id: { $in: ids } });
 
     return NextResponse.json(
       {
         success: true,
-        message: `${result.deletedCount} products deleted successfully.`,
+        message: `${result.deletedCount} products deleted from page ${page}.`,
       },
       { status: 200 }
     );
   } catch (err) {
-    console.error("❌ Failed to delete all products:", err);
+    console.error("❌ Failed to delete products:", err);
     return NextResponse.json(
-      { error: "Failed to delete all products", details: err.message },
+      { error: "Failed to delete products", details: err.message },
       { status: 500 }
     );
   }

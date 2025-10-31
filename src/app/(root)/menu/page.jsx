@@ -54,21 +54,36 @@ const Page = () => {
     setPage(newPage);
   };
 
-  const handleDeleteAll = async () => {
+  const handleDeleteAll = async (deleteAll = false) => {
     if (!userId || !activeProjectId) return;
 
     const confirmDelete = confirm(
-      "⚠️ Are you sure you want to delete ALL products? This action cannot be undone."
+      deleteAll
+        ? "⚠️ Are you sure you want to delete ALL products? This action cannot be undone."
+        : `⚠️ Delete page ${page}? This action cannot be undone.`
     );
     if (!confirmDelete) return;
 
     try {
-      await removeAllProducts({ userId, projectId: activeProjectId });
-      toast.success("All products deleted successfully!");
-      await fetchPage(1);
+      await removeAllProducts({
+        userId,
+        projectId: activeProjectId,
+        page,
+        limit: ITEMS_PER_PAGE,
+        all: deleteAll,
+      });
+
+      toast.success(
+        deleteAll
+          ? "All products deleted successfully!"
+          : `Products from page ${page} deleted successfully!`
+      );
+
+      // Refresh after deletion
+      await fetchPage(deleteAll ? 1 : page);
     } catch (err) {
-      console.error("❌ Failed to delete all products:", err);
-      toast.error("Failed to delete all products.");
+      console.error("❌ Failed to delete products:", err);
+      toast.error("Failed to delete products.");
     }
   };
 
@@ -118,11 +133,12 @@ const Page = () => {
         </div>
 
         <div className="flex justify-center items-center gap-3">
+          {/* 🗑️ Delete current page */}
           <Button
-            onClick={handleDeleteAll}
+            onClick={() => handleDeleteAll(false)}
             disabled={isLoading || (items?.length ?? 0) === 0}
-            variant="destructive"
-            className="flex items-center gap-2 rounded-md hover:bg-red-600 transition-all duration-200"
+            variant="outline"
+            className="flex items-center gap-2 rounded-md border-gray-300 hover:bg-gray-100 transition-all duration-200"
           >
             {isLoading ? (
               <>
@@ -131,11 +147,33 @@ const Page = () => {
               </>
             ) : (
               <>
+                <Trash2 className="w-4 h-4 text-red-500" />
+                <span>Delete Page</span>
+              </>
+            )}
+          </Button>
+
+          {/* 🧨 Delete all pages */}
+          <Button
+            onClick={() => handleDeleteAll(true)}
+            disabled={isLoading || (pagination?.totalCount ?? 0) === 0}
+            variant="destructive"
+            className="flex items-center gap-2 rounded-md hover:bg-red-600 transition-all duration-200"
+          >
+            {isLoading ? (
+              <>
+                <Loader2 className="w-4 h-4 animate-spin" />
+                <span>Deleting All...</span>
+              </>
+            ) : (
+              <>
                 <Trash2 className="w-4 h-4" />
                 <span>Delete All</span>
               </>
             )}
           </Button>
+
+          {/* 🔄 Refresh */}
           <Button
             onClick={() => fetchPage(page)}
             disabled={isLoading}
@@ -166,38 +204,40 @@ const Page = () => {
         projectId={activeProjectId}
       />
 
-      <div className="flex justify-between items-center mt-6">
-        <p className="text-sm text-gray-500">
-          Page {page} of {pagination?.totalPages || 1} (
-          {pagination?.totalCount || 0} items)
-        </p>
+      {pagination?.totalPages > 1 && (
+        <div className="flex justify-between items-center mt-6">
+          <p className="text-sm text-gray-500">
+            Page {page} of {pagination?.totalPages || 1} (
+            {pagination?.totalCount || 0} items)
+          </p>
 
-        <div className="flex gap-2">
-          <Button
-            variant="outline"
-            size="sm"
-            disabled={page === 1 || isLoading}
-            onClick={() => handlePageChange(page - 1)}
-            className="flex items-center gap-1"
-          >
-            <ChevronLeft className="h-4 w-4" />
-            Prev
-          </Button>
+          <div className="flex gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              disabled={page === 1 || isLoading}
+              onClick={() => handlePageChange(page - 1)}
+              className="flex items-center gap-1"
+            >
+              <ChevronLeft className="h-4 w-4" />
+              Prev
+            </Button>
 
-          {renderPageButtons()}
+            {renderPageButtons()}
 
-          <Button
-            variant="outline"
-            size="sm"
-            disabled={page === (pagination?.totalPages || 1) || isLoading}
-            onClick={() => handlePageChange(page + 1)}
-            className="flex items-center gap-1"
-          >
-            Next
-            <ChevronRight className="h-4 w-4" />
-          </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              disabled={page === (pagination?.totalPages || 1) || isLoading}
+              onClick={() => handlePageChange(page + 1)}
+              className="flex items-center gap-1"
+            >
+              Next
+              <ChevronRight className="h-4 w-4" />
+            </Button>
+          </div>
         </div>
-      </div>
+      )}
     </motion.div>
   );
 };

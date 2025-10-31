@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { addProductToQueue } from "@/lib/upload-service/job/addProductToQueue";
 import dbConnect from "@/lib/dbConnect";
+import Product from "@/model/Product";
 
 export const POST = async (req) => {
   try {
@@ -13,7 +14,15 @@ export const POST = async (req) => {
       sub_category,
       food_type,
       description,
+      productId,
     } = await req.json();
+
+    const product = await Product.findById(productId);
+
+    if (product) {
+      product.status = "accepted";
+      await product.save();
+    }
 
     await addProductToQueue({
       title,
@@ -22,6 +31,7 @@ export const POST = async (req) => {
       food_type,
       description,
       file,
+      productId,
     });
 
     return NextResponse.json({ success: true, message: "Job added to queue" });

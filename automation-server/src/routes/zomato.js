@@ -5,6 +5,8 @@ import axios from "axios";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import dotenv from "dotenv";
+dotenv.config();
 
 const zomatoRouter = express.Router();
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -69,6 +71,9 @@ zomatoRouter.post("/", async (req, res) => {
         category,
         food_type,
         sub_category,
+        _id: productId,
+        userId,
+        projectId,
       } = item;
 
       try {
@@ -125,8 +130,8 @@ zomatoRouter.post("/", async (req, res) => {
 
           await delay(4000);
 
-          // Try Map image button
-          let clicked = await page.evaluate(() => {
+          // Try clicking "Map image"
+          const clicked = await page.evaluate(() => {
             const btn = document.evaluate(
               '//button[contains(text(), "Map image")]',
               document,
@@ -142,25 +147,53 @@ zomatoRouter.post("/", async (req, res) => {
           });
 
           if (clicked) {
+            // ✅ Image mapped successfully → call first API
             try {
               uploadCount++;
-              await axios.post("http://localhost:3000/api/library/upload", {
-                img: imageUrl,
-                title: name,
-                description,
-                category: category?.name || "",
-                food_type,
-                sub_category: sub_category?.name || "",
-              });
+              await axios.post(
+                `${process.env.FOODSNAP_MANAGER_URL}/api/library/upload`,
+                {
+                  img: imageUrl,
+                  title: name,
+                  description,
+                  category: category?.name || "",
+                  food_type,
+                  sub_category: sub_category?.name || "",
+                  productId,
+                }
+              );
+              console.log(`[SUCCESS] Uploaded to library: ${name}`);
             } catch (apiErr) {
-              console.error("API call failed:", apiErr.message);
+              console.error("API upload failed:", apiErr.message);
             }
+          } else {
+            // ❌ Image rejected → call second API
+            try {
+              await axios.put(
+                `${process.env.FOODSNAP_MANAGER_URL}/api/${userId}/projects/${projectId}/products/${productId}`,
+                { status: "rejected" }
+              );
+              console.log(`[REJECTED] Image rejected for: ${name}`);
+            } catch (apiErr) {
+              console.error("Reject API failed:", apiErr.message);
+            }
+          }
+        } else {
+          // ❌ No image at all → reject directly
+          try {
+            await axios.put(
+              `${process.env.FOODSNAP_MANAGER_URL}/api/${userId}/projects/${projectId}/products/${productId}`,
+              { status: "rejected" }
+            );
+            console.log(`[REJECTED] No image for: ${name}`);
+          } catch (apiErr) {
+            console.error("Reject API failed:", apiErr.message);
           }
         }
 
         await delay(200);
 
-        // Discard
+        // Always discard the item after processing
         await page.evaluate(() => {
           const discardBtn = document.evaluate(
             '//button[contains(text(), "Discard")]',
@@ -174,7 +207,7 @@ zomatoRouter.post("/", async (req, res) => {
 
         console.log(`Processed "${name}"`);
       } catch (err) {
-        console.error(`Error processing item "${item.name}": ${err.message}`);
+        console.error(`Error processing item "${name}": ${err.message}`);
       }
     }
 
