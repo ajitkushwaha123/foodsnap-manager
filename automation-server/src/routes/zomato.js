@@ -84,7 +84,7 @@ zomatoRouter.post("/", async (req, res) => {
         await delay(200);
 
         if (imageUrl) {
-          await delay(3000);
+          await delay(200);
 
           await page.evaluate(() => {
             const uploadBtn = document.evaluate(
@@ -128,7 +128,7 @@ zomatoRouter.post("/", async (req, res) => {
           const fileInput = await page.$("#image-input");
           if (fileInput) await fileInput.uploadFile(localImagePath);
 
-          await delay(4000);
+          await delay(3000);
 
           // Try clicking "Map image"
           const clicked = await page.evaluate(() => {
