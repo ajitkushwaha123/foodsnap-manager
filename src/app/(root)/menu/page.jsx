@@ -193,7 +193,12 @@ const Page = () => {
             )}
           </Button>
 
-          <AutomationButton products={items || []} />
+          <AutomationButton
+            products={items || []}
+            page={page}
+            totalPages={pagination?.totalPages || 1}
+            onPageChange={setPage}
+          />
         </div>
       </div>
 
