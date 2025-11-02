@@ -2,7 +2,7 @@ import { productQueue } from "../queue/productQueue";
 
 export const addProductToQueue = async (productData) => {
   try {
-    await productQueue.add("add-product", productData, {
+    await productQueue.add("productQueue", productData, {
       attempts: 3,
       backoff: {
         type: "exponential",

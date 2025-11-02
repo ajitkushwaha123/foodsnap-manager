@@ -30,12 +30,12 @@ export async function uploadToS3(imageUrl) {
 
   const uploadParams = {
     Bucket: process.env.AWS_S3_BUCKET,
-    Key: `foodsnap/${fileName}`,
+    Key: `images/${fileName}`,
     Body: buffer,
     ContentType: contentType,
   };
 
   await s3.send(new PutObjectCommand(uploadParams));
 
-  return `https://${process.env.AWS_S3_BUCKET}.s3.${process.env.AWS_REGION}.amazonaws.com/foodsnap/${fileName}`;
+  return `https://${process.env.AWS_S3_BUCKET}.s3.${process.env.AWS_REGION}.amazonaws.com/images/${fileName}`;
 }

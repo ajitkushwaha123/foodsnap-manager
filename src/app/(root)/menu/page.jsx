@@ -16,6 +16,7 @@ import { useProduct } from "@/store/hooks/useProduct";
 import ProductGrid from "@/components/global/menu/product-grid";
 import { toast } from "sonner";
 import AutomationButton from "@/components/global/buttons/automation-button";
+import ImageVerificationButton from "@/components/global/buttons/image-verification-button";
 
 const ITEMS_PER_PAGE = 100;
 
@@ -193,12 +194,14 @@ const Page = () => {
             )}
           </Button>
 
-          <AutomationButton
+          {/* <AutomationButton
             products={items || []}
             page={page}
             totalPages={pagination?.totalPages || 1}
             onPageChange={setPage}
-          />
+          /> */}
+
+          <ImageVerificationButton products={items || []} />
         </div>
       </div>
 

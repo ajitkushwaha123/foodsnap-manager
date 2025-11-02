@@ -18,9 +18,9 @@ const normalizeFoodType = (ft, fallback = "veg") => {
 };
 
 export const POST = async (req) => {
-  try {
-    await dbConnect();
+  await dbConnect();
 
+  try {
     const body = await req.json();
     const {
       image_url,
@@ -35,12 +35,16 @@ export const POST = async (req) => {
     console.log("📦 Received upload request:", body);
 
     if (!image_url || !title || !category || !food_type || !productId) {
+      const reason = "Missing required fields in upload request";
+      console.warn(`⚠️ ${reason}`);
+
+      await Product.findByIdAndUpdate(productId, {
+        status: "rejected",
+        reason,
+      });
+
       return NextResponse.json(
-        {
-          success: false,
-          error:
-            "Missing required fields: image_url, title, category, food_type, productId",
-        },
+        { success: false, error: reason },
         { status: 400 }
       );
     }
@@ -65,14 +69,12 @@ export const POST = async (req) => {
 
     console.log("✅ Image saved:", newImage._id.toString());
 
-    const product = await Product.findOne({ _id: productId });
-    if (product) {
-      product.status = "done";
-      await product.save();
-      console.log(`📦 Product ${productId} marked as done`);
-    } else {
-      console.warn(`⚠️ Product not found for ID: ${productId}`);
-    }
+    await Product.findByIdAndUpdate(productId, {
+      status: "done",
+      reason: "Image successfully uploaded and saved",
+    });
+
+    console.log(`📦 Product ${productId} marked as done`);
 
     return NextResponse.json(
       { success: true, image: newImage },
@@ -80,11 +82,25 @@ export const POST = async (req) => {
     );
   } catch (error) {
     console.error("[IMAGE_UPLOAD_ERROR]", error);
+
+    const errorMessage =
+      error.message || "An unexpected error occurred during upload";
+
+    try {
+      const body = await req.json().catch(() => ({}));
+      if (body?.productId) {
+        await Product.findByIdAndUpdate(body.productId, {
+          status: "failed",
+          reason: errorMessage,
+        });
+        console.log(`❌ Product ${body.productId} marked as failed`);
+      }
+    } catch {
+      console.warn("⚠️ Could not update product status to failed");
+    }
+
     return NextResponse.json(
-      {
-        success: false,
-        error: error.message || "An error occurred while uploading the image.",
-      },
+      { success: false, error: errorMessage },
       { status: 500 }
     );
   }

@@ -21,14 +21,54 @@ const productSchema = new mongoose.Schema(
     projectId: { type: String, required: true },
     status: {
       type: String,
-      enum: ["pending", "accepted", "rejected", "done"],
+      enum: [
+        "pending",
+        "queued",
+        "uploading",
+        "uploaded",
+        "analysis_failed",
+        "accepted",
+        "rejected",
+        "done",
+        "failed",
+      ],
       default: "pending",
     },
+
+    reason: {
+      type: String,
+      default: "",
+      trim: true,
+    },
+
+    status_logs: [
+      {
+        status: String,
+        reason: String,
+        timestamp: { type: Date, default: Date.now },
+      },
+    ],
   },
   {
     timestamps: true,
   }
 );
+
+productSchema.pre("findOneAndUpdate", function (next) {
+  const update = this.getUpdate();
+  if (update?.$set?.status) {
+    this.updateOne({
+      $push: {
+        status_logs: {
+          status: update.$set.status,
+          reason: update.$set.reason || "",
+          timestamp: new Date(),
+        },
+      },
+    });
+  }
+  next();
+});
 
 const Product =
   mongoose.models.Product || mongoose.model("Product", productSchema);
