@@ -36,10 +36,7 @@ const updateStatus = async (productId, status, reason = "") => {
   }
 };
 
-/**
- * Validates and transforms the image URL if it’s outside allowed dimensions.
- */
-const getTransformedImageUrl = async (imageUrl) => {
+export const getTransformedImageUrl = async (imageUrl) => {
   try {
     if (!imageUrl) return null;
 
@@ -59,7 +56,6 @@ const getTransformedImageUrl = async (imageUrl) => {
       return imageUrl;
     }
 
-    // Apply resize/crop transformation using the provider’s image params
     const transformedUrl = `${imageUrl}?fit=around|${MAX_WIDTH}:${MAX_HEIGHT}&crop=${MAX_WIDTH}:${MAX_HEIGHT}`;
     console.log(
       `⚙️ Image out of range — using transformed URL: ${transformedUrl}`
@@ -119,7 +115,6 @@ export const POST = async (req) => {
           continue;
         }
 
-        // Add product to BullMQ queue
         await addProductToQueue({
           title: product.name,
           category: product.category,

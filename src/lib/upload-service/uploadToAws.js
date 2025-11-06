@@ -39,3 +39,24 @@ export async function uploadToS3(imageUrl) {
 
   return `https://${process.env.AWS_S3_BUCKET}.s3.${process.env.AWS_REGION}.amazonaws.com/images/${fileName}`;
 }
+
+export async function uploadToAws(buffer, fileName, contentType) {
+  if (!buffer) throw new Error("No file buffer provided");
+
+  const ext = fileName.split(".").pop() || "jpg";
+  const key = `images/${randomUUID()}.${ext}`;
+
+  const uploadParams = {
+    Bucket: process.env.AWS_S3_BUCKET,
+    Key: key,
+    Body: buffer,
+    ContentType: contentType,
+  };
+
+  await s3.send(new PutObjectCommand(uploadParams));
+
+  return {
+    url: `https://${process.env.AWS_S3_BUCKET}.s3.${process.env.AWS_REGION}.amazonaws.com/${key}`,
+    key,
+  };
+}

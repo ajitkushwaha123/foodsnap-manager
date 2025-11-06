@@ -49,6 +49,8 @@ export const POST = async (req) => {
       );
     }
 
+    console.log("🖼 Uploading image to database...", image_url);
+
     const newImage = await Image.create({
       title: title || "-",
       auto_tags: [],
