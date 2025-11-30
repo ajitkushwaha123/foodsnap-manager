@@ -69,30 +69,22 @@ const Page = () => {
 
   const renderPageButtons = () => {
     const totalPages = pagination?.totalPages || 1;
-    const buttons = [];
-    const maxButtons = 5;
-    let start = Math.max(1, page - 2);
-    let end = Math.min(totalPages, start + maxButtons - 1);
 
-    if (end - start < maxButtons - 1) {
-      start = Math.max(1, end - maxButtons + 1);
-    }
-
-    for (let i = start; i <= end; i++) {
-      buttons.push(
+    return Array.from({ length: totalPages }, (_, index) => {
+      const pageNum = index + 1;
+      return (
         <Button
-          key={i}
+          key={pageNum}
           size="sm"
-          variant={i === page ? "default" : "outline"}
+          variant={pageNum === page ? "default" : "outline"}
           disabled={isLoading}
-          onClick={() => handlePageChange(i)}
+          className="min-w-[48px]"
+          onClick={() => handlePageChange(pageNum)}
         >
-          {i}
+          {pageNum}
         </Button>
       );
-    }
-
-    return buttons;
+    });
   };
 
   return (
@@ -174,15 +166,8 @@ const Page = () => {
         </div>
       </div>
 
-      <ImageGrid images={items || []} isLoading={isLoading} />
-
       {pagination?.totalPages > 1 && (
-        <div className="flex justify-between items-center mt-6">
-          <p className="text-sm text-gray-500">
-            Page {page} of {pagination?.totalPages || 1} (
-            {pagination?.totalCount || 0} images)
-          </p>
-
+        <div className="flex w-full overflow-x-scroll justify-between items-center my-6">
           <div className="flex gap-2">
             <Button
               variant="outline"
@@ -210,6 +195,8 @@ const Page = () => {
           </div>
         </div>
       )}
+
+      <ImageGrid images={items || []} isLoading={isLoading} />
     </motion.div>
   );
 };

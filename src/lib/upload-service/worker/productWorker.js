@@ -21,71 +21,39 @@ const worker = new Worker(
   async (job) => {
     console.log(`[Job ${job.id}] 🚀 Processing product ${job.data.productId}`);
 
-    const {
-      title,
-      category,
-      sub_category,
-      food_type,
-      description,
-      productId,
-      image_url,
-      userId,
-      projectId,
-    } = job.data;
+    const payload = job.data;
+    const apiToCall = "/api/library/upload/verify-image";
+
+    const fullUrl = `${process.env.NEXT_PUBLIC_BASE_URL}${apiToCall}`;
+    console.log(`[Job ${job.id}] Calling: ${fullUrl}`);
 
     try {
-      const { data } = await axios.post(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/library/upload/verify-image`,
-        {
-          image_url,
-          title,
-          category,
-          sub_category,
-          food_type,
-          description,
-          productId,
-          userId,
-          projectId,
-        }
+      const { data } = await axios.post(fullUrl, payload);
+      console.log(
+        `[Job ${job.id}] ✅ Done using ${apiToCall}: ${data?.message || ""}`
       );
-
-      console.log(`[Job ${job.id}] ✅ Verification complete: ${data.message}`);
       return data;
     } catch (err) {
-      console.error(`[Job ${job.id}] ❌ Verification failed:`, err.message);
+      console.error(`[Job ${job.id}] ❌ Error:`, err?.message || err);
       throw err;
     }
   },
   {
     connection,
-    concurrency: 1,
+    concurrency: 1, // process one at a time
     limiter: {
-      max: 1,
-      duration: 15000,
+      max: 1, // 1 job
+      duration: 5000, // every 5 seconds
     },
   }
 );
 
-console.log("🚀 Worker started and listening for jobs in 'productQueue' queue");
+console.log("🚀 Worker started.");
 
-// Event logs
 worker.on("completed", (job) => {
   console.log(`✅ Job ${job.id} completed`);
 });
 
 worker.on("failed", (job, err) => {
-  console.error(`❌ Job ${job?.id} failed: ${err.message}`);
+  console.error(`❌ Job ${job?.id} failed: ${err?.message || err}`);
 });
-
-// Graceful shutdown
-process.on("SIGTERM", () => {
-  console.log("SIGTERM received. Closing worker...");
-  worker.close().then(() => process.exit(0));
-});
-
-process.on("SIGINT", () => {
-  console.log("SIGINT received. Closing worker...");
-  worker.close().then(() => process.exit(0));
-});
-
-export default worker;

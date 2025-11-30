@@ -124,6 +124,13 @@ export const POST = async (req, { params }) => {
 
       const productOps = products
         .map((prod) => {
+          if (!prod.img || prod.img.trim() === "") {
+            console.warn(
+              `⏭️ Skipping product "${prod.name}" – no image provided`
+            );
+            return null;
+          }
+
           const categoryName = prod.category?.trim()?.toLowerCase();
           const categoryId = categoryMap[categoryName];
 

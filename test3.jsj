@@ -1,0 +1,107 @@
+{
+    "success": true,
+    "message": "Image Uploaded Successfully",
+    "data": {
+        "image_hash": "a0efb57f7c7f401bbe916dd5bf4382df.jpg",
+        "image_url": "https:\/\/b.zmtcdn.com\/data\/dish_photos\/2df\/a0efb57f7c7f401bbe916dd5bf4382df.jpg",
+        "thumb_url": "https:\/\/b.zmtcdn.com\/data\/dish_photos\/2df\/a0efb57f7c7f401bbe916dd5bf4382df.jpg?fit=around%7C200%3A200&crop=200%3A200%3B%2A%2C%2A",
+        "image_scores": [
+            {
+                "category": "approved",
+                "score": 0.624995112
+            },
+            {
+                "category": "rejected",
+                "score": 0.375004888
+            },
+            {
+                "category": "too-zommed-in",
+                "score": 0.296979427
+            },
+            {
+                "category": "image-blurred",
+                "score": 0.558327079
+            },
+            {
+                "category": "stock-image",
+                "score": 0.702428579
+            },
+            {
+                "category": "food-not-in-center",
+                "score": 0.238939404
+            },
+            {
+                "category": "framing-composition",
+                "score": 0.285449415
+            },
+            {
+                "category": "image-from-other-res",
+                "score": 0.596684396
+            },
+            {
+                "category": "not-appetizing",
+                "score": 0.192571878
+            },
+            {
+                "category": "incorrect-angle",
+                "score": 0.355449557
+            },
+            {
+                "category": "image-contains-graphic-element",
+                "score": 0.168118447
+            },
+            {
+                "category": "contains-text-element",
+                "score": 0.380551845
+            },
+            {
+                "category": "image-low-light",
+                "score": 0.254117519
+            },
+            {
+                "category": "cutlery",
+                "score": 0.116845399
+            },
+            {
+                "category": "human-element",
+                "score": 0.0359399319
+            },
+            {
+                "category": "color-correction",
+                "score": 0.00614544749
+            },
+            {
+                "category": "shows-spillage",
+                "score": 0.0420894027
+            },
+            {
+                "category": "image-over-saturated",
+                "score": 0.325824827
+            },
+            {
+                "category": "overgarnished",
+                "score": 0.0760426819
+            },
+            {
+                "category": "brand-element",
+                "score": 0.193899095
+            }
+        ],
+        "image_stock_info": {
+            "imageHash": "a0efb57f7c7f401bbe916dd5bf4382df.jpg"
+        },
+        "height": 1200,
+        "width": 1800,
+        "is_resized": false,
+        "images_data": {
+            "imageUrl": "https:\/\/b.zmtcdn.com\/data\/dish_photos\/2df\/a0efb57f7c7f401bbe916dd5bf4382df.jpg",
+            "thumbUrl": "https:\/\/b.zmtcdn.com\/data\/dish_photos\/2df\/a0efb57f7c7f401bbe916dd5bf4382df.jpg?fit=around%7C200%3A200&crop=200%3A200%3B%2A%2C%2A",
+            "imageHash": "a0efb57f7c7f401bbe916dd5bf4382df.jpg",
+            "imageQualityScore": 0.59792012,
+            "imageQualityScoreData": {
+                "modelVersion": "v3.4",
+                "imageQualityScore": 0.5979201048612595
+            }
+        }
+    }
+}

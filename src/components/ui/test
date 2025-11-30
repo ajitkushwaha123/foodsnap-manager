@@ -1,0 +1,191 @@
+{
+  "res_id": "21047451",
+  "update_menu": {
+    "menuEntityTaxes": [
+      {
+        "entityType": "CATALOGUE",
+        "entityId": "753130522",
+        "taxGroupIds": [
+          1
+        ],
+        "entityTaxes": []
+      },
+      {
+        "entityType": "CATALOGUE",
+        "tempReferenceId": "IGIFP2IN1JATGTLMJPM1JRO4MIEKNETX",
+        "taxGroupIds": [
+          1
+        ],
+        "entityTaxes": []
+      }
+    ],
+    "menuEntityCharges": [],
+    "categoryWrappers": [
+      {
+        "category": {
+          "categoryId": "56679938",
+          "tempReferenceId": "",
+          "resId": "21047451",
+          "name": "Desserts",
+          "order": 1,
+          "hasTiming": false
+        },
+        "timings": [],
+        "timingsV2": {},
+        "subCategoryWrappers": [
+          {
+            "subCategory": {
+              "subCategoryId": "81747311",
+              "name": "Desserts",
+              "order": 1,
+              "categoryId": "56679938",
+              "tempReferenceId": ""
+            },
+            "subCategoryEntities": [
+              {
+                "id": "899713248",
+                "subCategoryId": "81747311",
+                "entityType": "catalogue",
+                "entityId": "753130522",
+                "order": 1
+              }
+            ]
+          },
+          {
+            "subCategory": {
+              "subCategoryId": "",
+              "name": "Ice Creams",
+              "order": 2,
+              "categoryId": "56679938",
+              "tempReferenceId": "16W7GJO81JATGT4VCPFSKP4VMIEKN1MH"
+            },
+            "subCategoryEntities": [
+              {
+                "id": "",
+                "subCategoryId": "",
+                "entityType": "catalogue",
+                "entityId": "",
+                "order": 1,
+                "tempReferenceId": "IGIFP2IN1JATGTLMJPM1JRO4MIEKNETX"
+              }
+            ]
+          }
+        ],
+        "categoryServices": [
+          {
+            "categoryId": "56679938",
+            "service": "DELIVERY",
+            "status": "ENABLED",
+            "id": "149371804"
+          }
+        ]
+      }
+    ],
+    "catalogueWrappers": [
+      {
+        "catalogue": {
+          "catalogueId": "753130522",
+          "resId": "21047451",
+          "name": "Gulab Jamun",
+          "hasProperties": false,
+          "isVisible": true,
+          "media": [],
+          "templateType": "TT_DEFAULT",
+          "turnOnTime": "2025-11-25 12:33:39",
+          "onHoldStatus": 0,
+          "isRefrigerationRequired": false
+        },
+        "catalogueTags": [
+          "veg",
+          "services",
+          "category-slab-1"
+        ],
+        "variantWrappers": [
+          {
+            "variant": {
+              "variantId": "1006494538",
+              "turnOnTime": "2025-11-25 12:33:39",
+              "catalogueId": "753130522"
+            },
+            "variantModifierGroupMaps": [],
+            "variantPrices": [
+              {
+                "variantId": "1006494538",
+                "service": "delivery",
+                "isVisible": true,
+                "maxAllowedPrice": 298.5,
+                "basePrice": 199,
+                "historyPrice": 199,
+                "price": 199
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "catalogue": {
+          "tempReferenceId": "IGIFP2IN1JATGTLMJPM1JRO4MIEKNETX",
+          "resId": "21047451",
+          "name": "Ice Cream",
+          "hasProperties": false,
+          "isVisible": true,
+          "media": [],
+          "isRefrigerationRequired": false
+        },
+        "catalogueTags": [
+          "veg",
+          "services"
+        ],
+        "variantWrappers": [
+          {
+            "variant": {
+              "tempReferenceId": "N904M6C21JATGTLMECS6P403MIEKNETX"
+            },
+            "variantModifierGroupMaps": [],
+            "variantPrices": [
+              {
+                "isVisible": true,
+                "service": "delivery",
+                "tempReferenceId": "4UOIIZLN1JATGTLMHM1UFE3LMIEKNETX",
+                "price": 200
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "modifierGroupWrappers": [],
+    "resDisclaimers": [],
+    "requestedModerationData": {
+      "variantPrices": []
+    },
+    "contentCombos": [],
+    "disclaimers": [],
+    "resId": "21047451",
+    "requestMetadata": {}
+  },
+  "onHoldItems": {
+    "catalogues": {
+      "753130522": {
+        "comments": [
+          "Item under review for moderation. May take up to 3 hours to review."
+        ]
+      }
+    }
+  },
+  "last_opened_catalogue": {
+    "category": {
+      "tempReferenceId": "",
+      "categoryId": "56679938"
+    },
+    "subCategory": {
+      "tempReferenceId": "16W7GJO81JATGT4VCPFSKP4VMIEKN1MH",
+      "subCategoryId": ""
+    },
+    "catalogue": {
+      "tempReferenceId": "",
+      "catalogueId": ""
+    }
+  },
+  "menuVersion": "17+64074645243"
+}
