@@ -1,147 +1,187 @@
 "use client";
 
-import * as React from "react";
 import { motion } from "framer-motion";
-import { Card, CardContent } from "@/components/ui/card";
+import { useImage } from "@/store/hooks/useImage";
 import { Button } from "@/components/ui/button";
 import {
-  ImageIcon,
   Loader2,
-  PackageSearch,
+  CheckCircle,
+  Star,
+  UtensilsCrossed,
   Trash2,
-  Check,
-  X,
 } from "lucide-react";
-import { useImage } from "@/store/hooks/useImage";
+import { useState } from "react";
+import { toast } from "sonner";
 
 export default function ImageGrid({ images, isLoading }) {
-  const { removeImage, updateImageStatus } = useImage();
-  const [deletingId, setDeletingId] = React.useState(null);
-  const [updatingId, setUpdatingId] = React.useState(null);
+  const {
+    updateImageStatus,
+    MarkImageAsCombo,
+    MarkImageAsLatest,
+    MarkImageAsThali,
+    removeImage,
+  } = useImage();
 
-  const handleDelete = async (id) => {
-    if (!id) return;
+  const [loadingId, setLoadingId] = useState(null);
+
+  const performUpdate = async (fn, payload, successMsg) => {
     try {
-      setDeletingId(id);
-      await removeImage({ imageId: id });
+      setLoadingId(payload.imageId);
+      await fn(payload);
+      toast.success(successMsg);
+    } catch {
+      toast.error("Action failed!");
     } finally {
-      setDeletingId(null);
+      setLoadingId(null);
     }
   };
 
-  const handleToggleApproved = async (img) => {
-    if (!img?._id) return;
-    const newStatus = !img.approved;
-    console.log("🔄 Toggling approved status for image:", img._id, newStatus);
-    try {
-      setUpdatingId(img._id);
-      await updateImageStatus({ imageId: img._id, status: newStatus });
-    } catch (err) {
-      console.error("❌ Failed to update image status:", err);
-    } finally {
-      setUpdatingId(null);
-    }
-  };
-
-  const showEmpty = !isLoading && (!images || images.length === 0);
+  if (!images?.length && !isLoading)
+    return (
+      <div className="text-center py-20 text-gray-500 text-lg">
+        No images found
+      </div>
+    );
 
   return (
-    <div className="w-full">
-      <Card className="w-full border-none shadow-none">
-        <CardContent>
-          {isLoading ? (
-            <div className="flex flex-col items-center justify-center h-[50vh] text-center space-y-4">
-              <Loader2 className="w-8 h-8 text-gray-400 animate-spin" />
-              <p className="text-gray-600 text-sm font-medium">
-                Fetching your latest images...
-              </p>
+    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5 mt-6">
+      {images.map((img) => {
+        const loading = loadingId === img._id;
+
+        return (
+          <motion.div
+            key={img._id}
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.2 }}
+            className="relative bg-white rounded-sm shadow-sm hover:shadow border border-gray-200 overflow-hidden"
+          >
+            <img
+              src={img?.image_url}
+              alt="img"
+              className="w-full h-48 object-cover border-b border-gray-200"
+            />
+
+            {/* BADGES */}
+            <div className="absolute top-2 left-2 flex flex-wrap gap-1">
+              {img.isCombo && (
+                <span className="px-2 py-[2px] text-xs bg-blue-600 text-white rounded">
+                  Combo
+                </span>
+              )}
+              {img.latest && (
+                <span className="px-2 py-[2px] text-xs bg-green-600 text-white rounded">
+                  Latest
+                </span>
+              )}
+              {img.isThali && (
+                <span className="px-2 py-[2px] text-xs bg-orange-600 text-white rounded">
+                  Thali
+                </span>
+              )}
             </div>
-          ) : showEmpty ? (
-            <div className="flex flex-col items-center justify-center h-[50vh] text-center space-y-4">
-              <PackageSearch className="w-16 h-16 text-gray-300" />
-              <h3 className="text-md font-semibold text-gray-800">
-                No images found
-              </h3>
-              <p className="text-gray-500 text-sm max-w-sm">
-                Once you upload or import images, they’ll appear here.
-              </p>
-            </div>
-          ) : (
-            <div className="grid gap-5 grid-cols-2 sm:grid-cols-3 md:grid-cols-4">
-              {images.map((img) => (
-                <motion.div
-                  key={img._id}
-                  whileHover={{ scale: 1.03 }}
-                  transition={{ duration: 0.2 }}
-                  className="w-full cursor-pointer"
+
+            {/* Action Buttons */}
+            <div className="px-2 py-2 border-t border-gray-200 bg-gray-50">
+              <div className="grid grid-cols-5 gap-[6px]">
+                <Button
+                  className="h-9 "
+                  variant={img.approved ? "default" : "outline"}
+                  disabled={loading}
+                  onClick={() =>
+                    performUpdate(
+                      updateImageStatus,
+                      { imageId: img._id, status: !img.approved },
+                      "Status updated!"
+                    )
+                  }
                 >
-                  <Card
-                    className={`overflow-hidden border-2 rounded-md p-3  ${
-                      img.approved ? "border-green-300" : "border-red-300"
-                    } shadow-sm hover:shadow-md transition relative group`}
-                  >
-                    <div className="relative border-2 rounded-md overflow-hidden">
-                      {img?.image_url ? (
-                        <img
-                          src={img.image_url}
-                          alt={img.title || "Image"}
-                          className="w-full h-48 object-cover"
-                        />
-                      ) : (
-                        <div className="w-full h-48 bg-gray-100 flex items-center justify-center">
-                          <ImageIcon className="text-gray-400 w-8 h-8" />
-                        </div>
-                      )}
+                  {loading ? (
+                    <Loader2 className="animate-spin h-4 w-4" />
+                  ) : (
+                    <CheckCircle className="h-4 w-4" />
+                  )}
+                </Button>
 
-                      <span>{img?.title}</span>
+                <Button
+                  className="h-9"
+                  variant={img.isCombo ? "default" : "outline"}
+                  disabled={loading}
+                  onClick={() =>
+                    performUpdate(
+                      MarkImageAsCombo,
+                      { imageId: img._id, is_combo: !img.isCombo },
+                      "Combo updated!"
+                    )
+                  }
+                >
+                  {loading ? (
+                    <Loader2 className="animate-spin h-4 w-4" />
+                  ) : (
+                    <UtensilsCrossed className="h-4 w-4" />
+                  )}
+                </Button>
 
-                      <div className="absolute top-2 right-2 flex gap-2 opacity-0 group-hover:opacity-100 transition">
-                        <Button
-                          size="icon"
-                          variant={img.approved ? "destructive" : "default"}
-                          className={
-                            img.approved
-                              ? "bg-red-500 hover:bg-red-600"
-                              : "bg-green-500 hover:bg-green-600"
-                          }
-                          onClick={() => handleToggleApproved(img)}
-                          disabled={updatingId === img._id}
-                          title={
-                            img.approved
-                              ? "Mark as not approved"
-                              : "Mark as approved"
-                          }
-                        >
-                          {updatingId === img._id ? (
-                            <Loader2 className="w-4 h-4 animate-spin text-white" />
-                          ) : img.approved ? (
-                            <X className="w-4 h-4 text-white" />
-                          ) : (
-                            <Check className="w-4 h-4 text-white" />
-                          )}
-                        </Button>
+                <Button
+                  className="h-9"
+                  variant={img.latest ? "default" : "outline"}
+                  disabled={loading}
+                  onClick={() =>
+                    performUpdate(
+                      MarkImageAsLatest,
+                      { imageId: img._id, is_latest: !img.latest },
+                      "Latest updated!"
+                    )
+                  }
+                >
+                  {loading ? (
+                    <Loader2 className="animate-spin h-4 w-4" />
+                  ) : (
+                    <Star className="h-4 w-4" />
+                  )}
+                </Button>
 
-                        <Button
-                          variant="destructive"
-                          size="icon"
-                          onClick={() => handleDelete(img._id)}
-                          disabled={deletingId === img._id}
-                        >
-                          {deletingId === img._id ? (
-                            <Loader2 className="w-4 h-4 animate-spin" />
-                          ) : (
-                            <Trash2 className="w-4 h-4" />
-                          )}
-                        </Button>
-                      </div>
-                    </div>
-                  </Card>
-                </motion.div>
-              ))}
+                <Button
+                  className="h-9"
+                  variant={img.isThali ? "default" : "outline"}
+                  disabled={loading}
+                  onClick={() =>
+                    performUpdate(
+                      MarkImageAsThali,
+                      { imageId: img._id, is_thali: !img.isThali },
+                      "Thali updated!"
+                    )
+                  }
+                >
+                  {loading ? (
+                    <Loader2 className="animate-spin h-4 w-4" />
+                  ) : (
+                    <span className="text-lg">🍱</span>
+                  )}
+                </Button>
+
+                <Button
+                  className="h-9"
+                  variant="destructive"
+                  disabled={loading}
+                  onClick={() =>
+                    performUpdate(
+                      removeImage,
+                      { imageId: img._id },
+                      "Image deleted!"
+                    )
+                  }
+                >
+                  {loading ? (
+                    <Loader2 className="animate-spin h-4 w-4" />
+                  ) : (
+                    <Trash2 className="h-4 w-4" />
+                  )}
+                </Button>
+              </div>
             </div>
-          )}
-        </CardContent>
-      </Card>
+          </motion.div>
+        );
+      })}
     </div>
   );
 }
