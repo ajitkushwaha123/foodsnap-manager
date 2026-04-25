@@ -86,7 +86,7 @@ export const POST = async (req) => {
       {
         headers: {
           ...form.getHeaders(),
-          Cookie: process.env.ZOMATO_COOKIES2,
+          Cookie: process.env.ZOMATO_COOKIES_1,
           "User-Agent":
             "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36",
           Origin: "https://www.zomato.com",

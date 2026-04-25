@@ -2,13 +2,13 @@ import axios from "axios";
 import { Buffer } from "buffer";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const keys = [process.env.GEMINI_API_KEY].filter(Boolean);
-
-if (keys.length === 0) {
-  throw new Error("❌ No Gemini API keys found in environment variables.");
-}
+const getKeys = () => [process.env.GEMINI_API_KEY].filter(Boolean);
 
 export function getRandomGeminiClient() {
+  const keys = getKeys();
+  if (keys.length === 0) {
+    throw new Error("❌ No Gemini API keys found in environment variables.");
+  }
   const randomKey = keys[Math.floor(Math.random() * keys.length)];
   return new GoogleGenerativeAI(randomKey.trim());
 }

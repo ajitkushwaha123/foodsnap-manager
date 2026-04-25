@@ -36,6 +36,7 @@ const worker = new Worker(
           }
         );
 
+        console.log("data" , data)
         console.log(`[Job ${job.id}] ✅ Success: ${data.message}`);
         return data;
       } catch (err) {

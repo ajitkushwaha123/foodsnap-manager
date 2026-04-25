@@ -15,7 +15,6 @@ import { useProject } from "@/store/hooks/useProject";
 import { useProduct } from "@/store/hooks/useProduct";
 import ProductGrid from "@/components/global/menu/product-grid";
 import { toast } from "sonner";
-import AutomationButton from "@/components/global/buttons/automation-button";
 import ImageVerificationButton from "@/components/global/buttons/image-verification-button";
 
 const ITEMS_PER_PAGE = 100;

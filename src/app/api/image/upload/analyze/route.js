@@ -4,7 +4,7 @@ import { addProductToQueue } from "@/lib/upload-service/job/addProductToQueue";
 import Product from "@/model/Product";
 import Category from "@/model/Category";
 import SubCategory from "@/model/SubCategory";
-import { getTransformedImageUrl } from "@/app/api/library/upload/route";
+import { getTransformedImageUrl } from "@/lib/upload-utils";
 import dbConnect from "@/lib/dbConnect";
 
 export const runtime = "nodejs";

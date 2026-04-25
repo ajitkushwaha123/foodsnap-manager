@@ -32,7 +32,6 @@ export function NavUser() {
 
   const { user } = useUser();
 
-  console.log(user);
 
   return (
     <SidebarMenu>
