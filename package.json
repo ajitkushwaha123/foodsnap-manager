@@ -9,7 +9,7 @@
     "worker:zomato": "node ./src/lib/bullmq/workers/zomatoWorker.js",
     "worker:foodsnap": "node ./src/lib/upload-service/worker/productWorker.js",
     "worker:manual": "node ./src/lib/upload-service/worker/uploadImageWorker.js",
-    "build": "next build && xcopy /E /I /Y public .next\\standalone\\public && xcopy /E /I /Y .next\\static .next\\standalone\\.next\\static",
+    "build": "next build",
     "start": "electron .",
     "app:start": "concurrently -k \"node .next/standalone/server.js\" \"npm run worker:zomato\" \"npm run worker:foodsnap\" \"node bull-server/dashboard.js\" \"electron .\"",
     "lint": "eslint",
