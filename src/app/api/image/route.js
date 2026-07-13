@@ -31,6 +31,45 @@ export const DELETE = async (req) => {
   }
 };
 
+export const PUT = async (req) => {
+  try {
+    await dbConnect();
+
+    const body = await req.json();
+    const { ids, updates } = body;
+
+    if (!ids || !Array.isArray(ids) || ids.length === 0) {
+      return NextResponse.json(
+        { error: "No image IDs provided." },
+        { status: 400 }
+      );
+    }
+
+    if (!updates || typeof updates !== "object") {
+      return NextResponse.json(
+        { error: "No updates provided." },
+        { status: 400 }
+      );
+    }
+
+    const result = await Image.updateMany(
+      { _id: { $in: ids } },
+      { $set: updates }
+    );
+
+    return NextResponse.json({
+      success: true,
+      modifiedCount: result.modifiedCount,
+    });
+  } catch (err) {
+    console.error("Image bulk update route error:", err);
+    return NextResponse.json(
+      { error: "Failed to update images." },
+      { status: 500 }
+    );
+  }
+};
+
 export const GET = async (req) => {
   try {
     await dbConnect();

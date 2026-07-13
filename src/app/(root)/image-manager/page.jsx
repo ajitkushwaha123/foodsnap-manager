@@ -17,8 +17,8 @@ import {
 } from "lucide-react";
 import { useImage } from "@/store/hooks/useImage";
 
-const ITEMS_PER_PAGE = 100;
-const SEARCH_LIMIT = 60;
+const ITEMS_PER_PAGE = 5000;
+const SEARCH_LIMIT = 5000;
 
 const FOOD_TYPE_CHIPS = [
   { label: "All", value: "", color: "gray" },
@@ -55,6 +55,7 @@ const Page = () => {
   // ── Selection state ───────────────────────────────────────────
   const [selected, setSelected] = useState(new Set());
   const [isDeleting, setIsDeleting] = useState(false);
+  const [isMarkingLatest, setIsMarkingLatest] = useState(false);
 
   const isSearchMode = debouncedQuery.trim().length > 0 || foodType !== "";
 
@@ -183,6 +184,35 @@ const Page = () => {
     }
   };
 
+  const handleMarkAsLatest = async () => {
+    if (selected.size === 0) return;
+    
+    setIsMarkingLatest(true);
+    try {
+      const res = await fetch("/api/image", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ids: Array.from(selected),
+          updates: { latest: true },
+        }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setSelected(new Set());
+        if (isSearchMode) fetchSearch(debouncedQuery, searchPage, foodType);
+        else fetchPage(page);
+      } else {
+        alert(data.error || "Failed to mark images as latest.");
+      }
+    } catch (err) {
+      console.error("Mark as latest error:", err);
+      alert("An error occurred while updating images.");
+    } finally {
+      setIsMarkingLatest(false);
+    }
+  };
+
   const clearSearch = () => {
     setSearchQuery("");
     setDebouncedQuery("");
@@ -250,6 +280,27 @@ const Page = () => {
                       <XCircle className="w-4 h-4" />
                     </button>
                   </motion.div>
+                )}
+              </AnimatePresence>
+
+              {/* Mark as Latest button */}
+              <AnimatePresence>
+                {selected.size > 0 && (
+                  <motion.button
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.9 }}
+                    onClick={handleMarkAsLatest}
+                    disabled={isMarkingLatest}
+                    className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-white bg-blue-500 hover:bg-blue-600 rounded-lg transition-all duration-200 disabled:opacity-60 shadow-sm shadow-blue-200"
+                  >
+                    {isMarkingLatest ? (
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                    ) : (
+                      <CheckSquare className="w-4 h-4" />
+                    )}
+                    {isMarkingLatest ? "Updating…" : `Mark as Latest`}
+                  </motion.button>
                 )}
               </AnimatePresence>
 
@@ -492,17 +543,24 @@ const Page = () => {
                     </div>
 
                     {/* Food-type dot */}
-                    {img.food_type && (
-                      <div
-                        className={`absolute top-1.5 right-1.5 w-2.5 h-2.5 rounded-full border border-white/80 ${
-                          img.food_type === "veg"
-                            ? "bg-green-500"
-                            : img.food_type === "non-veg"
-                            ? "bg-red-500"
-                            : "bg-amber-400"
-                        }`}
-                      />
-                    )}
+                    <div className="absolute top-1.5 right-1.5 flex flex-col gap-1 items-end">
+                      {img.latest && (
+                        <div className="px-2 py-0.5 rounded-full bg-blue-500 text-white text-[10px] font-bold shadow-sm">
+                          LATEST
+                        </div>
+                      )}
+                      {img.food_type && (
+                        <div
+                          className={`w-2.5 h-2.5 rounded-full border border-white/80 ${
+                            img.food_type === "veg"
+                              ? "bg-green-500"
+                              : img.food_type === "non-veg"
+                              ? "bg-red-500"
+                              : "bg-amber-400"
+                          }`}
+                        />
+                      )}
+                    </div>
                   </div>
 
                   {/* Title bar */}

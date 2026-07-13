@@ -10,10 +10,11 @@ export async function GET(req) {
     const { searchParams } = new URL(req.url);
     const query = (searchParams.get("q") || "").trim();
     const page = Math.max(1, parseInt(searchParams.get("page") || "1", 10));
-    const limit = Math.min(100, Math.max(1, parseInt(searchParams.get("limit") || "60", 10)));
+    const limit = Math.min(50000, Math.max(1, parseInt(searchParams.get("limit") || "1000", 10)));
     const food_type = (searchParams.get("food_type") || "").trim();
     const category = (searchParams.get("category") || "").trim();
     const approved = searchParams.get("approved");
+    const latest = searchParams.get("latest");
     const skip = (page - 1) * limit;
 
     if (!query) {
@@ -91,6 +92,8 @@ export async function GET(req) {
     if (category) matchFilter.category = category;
     if (approved === "true") matchFilter.approved = true;
     else if (approved === "false") matchFilter.approved = false;
+    if (latest === "true") matchFilter.latest = true;
+    else if (latest === "false") matchFilter.latest = false;
 
     const hasFilters = Object.keys(matchFilter).length > 0;
 

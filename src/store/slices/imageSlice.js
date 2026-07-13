@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const fetchImages = createAsyncThunk(
   "image/fetchImages",
-  async ({ page = 1, limit = 100 }, { rejectWithValue }) => {
+  async ({ page = 1, limit = 5000 }, { rejectWithValue }) => {
     try {
       const { data } = await axios.get(
         `/api/image?page=${page}&limit=${limit}`
@@ -92,7 +92,7 @@ export const markAsThali = createAsyncThunk(
 
 export const approveMultipleImages = createAsyncThunk(
   "image/approveMultipleImages",
-  async ({ page = 1, limit = 100, all = false }, { rejectWithValue }) => {
+  async ({ page = 1, limit = 1000, all = false }, { rejectWithValue }) => {
     try {
       const { data } = await axios.post(`/api/image/approve-all`, {
         page,

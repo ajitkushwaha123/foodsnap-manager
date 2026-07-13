@@ -25,7 +25,7 @@ export const useImage = () => {
   }, [dispatch]);
 
   const getAllImages = useCallback(
-    async ({ page = 1, limit = 100 }) => {
+    async ({ page = 1, limit = 5000 }) => {
       try {
         return await dispatch(fetchImages({ page, limit })).unwrap();
       } catch (err) {
