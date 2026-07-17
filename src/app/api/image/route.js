@@ -82,10 +82,15 @@ export const GET = async (req) => {
 
     const sort = searchParams.get("sort") || "none";
     const sortQuery = sort === "title" ? { title: 1 } : {};
+    const premiumParam = searchParams.get("premium");
 
-    const images = await Image.find({}).sort(sortQuery).skip(skip).limit(limit).lean();
+    const filter = {};
+    if (premiumParam === "true") filter.premium = true;
+    else if (premiumParam === "false") filter.premium = false;
 
-    const totalCount = await Image.countDocuments();
+    const images = await Image.find(filter).sort(sortQuery).skip(skip).limit(limit).lean();
+
+    const totalCount = await Image.countDocuments(filter);
 
     return NextResponse.json({
       success: true,

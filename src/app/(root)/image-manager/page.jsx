@@ -194,7 +194,7 @@ const Page = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ids: Array.from(selected),
-          updates: { latest: true },
+          updates: { latest: true, premium: true },
         }),
       });
       const data = await res.json();

@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { LayoutGrid, ImageIcon } from "lucide-react";
+import { LayoutGrid, ImageIcon, Star } from "lucide-react";
 import { NavMain } from "@/components/nav-main";
 import { NavUser } from "@/components/nav-user";
 import { NavProjects } from "@/components/nav-projects";
@@ -53,6 +53,12 @@ export function AppSidebar({ ...props }) {
         title: "Image",
         url: "/image",
         icon: ImageIcon,
+        isActive: true,
+      },
+      {
+        title: "Premium",
+        url: "/premium-manager",
+        icon: Star,
         isActive: true,
       },
     ],
