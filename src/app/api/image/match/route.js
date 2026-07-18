@@ -190,14 +190,14 @@ export const POST = async (req) => {
 
     console.log(`[match] Item: "${cleanTitle}" | category: ${category} | food_type: ${food_type}`);
 
-    // ── Tier 1: Exact ────────────────────────────────────────────
-    let images = await matchExact(cleanTitle, food_type);
+    // ── Tier 1: Atlas fuzzy (Most Relevant) ────────────────────────
+    let images = await matchAtlas(cleanTitle, food_type);
     if (images.length > 0) {
-      console.log(`[match] Tier 1 (exact) → ${images.length} result(s)`);
+      console.log(`[match] Tier 1 (atlas) → ${images.length} result(s)`);
       return NextResponse.json({
         success: true,
         matched: true,
-        tier: "exact",
+        tier: "atlas",
         images,
       });
     }
@@ -214,14 +214,14 @@ export const POST = async (req) => {
       });
     }
 
-    // ── Tier 3: Atlas fuzzy ──────────────────────────────────────
-    images = await matchAtlas(cleanTitle, food_type);
+    // ── Tier 3: Exact ────────────────────────────────────────────
+    images = await matchExact(cleanTitle, food_type);
     if (images.length > 0) {
-      console.log(`[match] Tier 3 (atlas) → ${images.length} result(s)`);
+      console.log(`[match] Tier 3 (exact) → ${images.length} result(s)`);
       return NextResponse.json({
         success: true,
         matched: true,
-        tier: "atlas",
+        tier: "exact",
         images,
       });
     }
