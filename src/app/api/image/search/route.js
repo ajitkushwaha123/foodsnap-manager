@@ -15,6 +15,7 @@ export async function GET(req) {
     const category = (searchParams.get("category") || "").trim();
     const approved = searchParams.get("approved");
     const latest = searchParams.get("latest");
+    const premium = searchParams.get("premium");
     const skip = (page - 1) * limit;
 
     if (!query) {
@@ -94,6 +95,7 @@ export async function GET(req) {
     else if (approved === "false") matchFilter.approved = false;
     if (latest === "true") matchFilter.latest = true;
     else if (latest === "false") matchFilter.latest = false;
+    if (premium === "true") matchFilter.premium = true;
 
     const hasFilters = Object.keys(matchFilter).length > 0;
 
